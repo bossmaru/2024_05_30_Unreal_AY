@@ -3,8 +3,9 @@
 
 PaintScene::PaintScene()
 {
-    _rect = make_shared<Rect>(Vector2(0.0f, 0.0f), Vector2(50.0f, 50.0f));
-    _circle = make_shared<Circle>(Vector2(250.0f, 250.0f), Vector2(50.0f, 50.0f));
+    _rect = make_shared<RectCollider>(Vector2(0.0f, 0.0f), Vector2(50.0f, 50.0f));
+    _circle = make_shared<CircleCollider>(Vector2(250.0f, 250.0f), 50.0f);
+    _line = make_shared<Line>(Vector2(100.0f, 100.0f), Vector2(200.0f, 200.0f));
 }
 
 PaintScene::~PaintScene()
@@ -13,34 +14,18 @@ PaintScene::~PaintScene()
 
 void PaintScene::Update()
 {
-    _circle->Update();
-
-    _rect->_center = _rect->_center + Vector2(0.5f, 0.5f);
+   //  _rect->_center = LERP(_rect->_center, mousePos, 0.1f);
     _rect->Update();
+
+     // 선형보간
+    _circle->_center = LERP(_circle->_center, mousePos, 0.1f);
+    _circle->Update();
+    _line->Update();
 }
 
 void PaintScene::Render(HDC hdc)
 {
-    // 색 입히기 : red
-    HBRUSH redBrush = CreateSolidBrush(RGB(255, 0, 0));
-    SelectObject(hdc, redBrush);
-
     _rect->Render(hdc);
-
-    // 색 입히기 : blue
-    HBRUSH blueBrush = CreateSolidBrush(RGB(0, 0, 255));
-    SelectObject(hdc, blueBrush);
-
-    // 원 그리기
-    // Ellipse(hdc, 200, 200, 300, 300);
     _circle->Render(hdc);
-
-
-    // 선 색깔 고르기
-    HPEN greenPen = CreatePen(PS_SOLID, 3, RGB(0, 255, 0));
-    SelectObject(hdc, greenPen);
-
-    // 선 그리기
-    MoveToEx(hdc, 100, 100, nullptr);
-    LineTo(hdc, 200, 200);
+    // _line->Render(hdc);
 }

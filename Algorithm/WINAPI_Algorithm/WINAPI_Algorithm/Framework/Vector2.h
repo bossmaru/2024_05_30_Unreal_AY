@@ -82,13 +82,42 @@ public:
 		return result;
 	}
 
+	float Length() const
+	{
+		return sqrt(_x * _x + _y * _y);
+	}
 
+	float Distance(Vector2 other) const
+	{
+		Vector2 temp = other - *this;
 
-	float Length() const;
+		return temp.Length();
+	}
 
-	void Normalize();
+	float Angle() const
+	{
+		return atan2(_y , _x);
+	}
 
-	Vector2 NormalVector2();
+	void Normalize()
+	{
+		float len = Length();
+
+		if (len != 0)
+		{
+			_x /= len;
+			_y /= len;
+		}
+	}
+
+	Vector2 NormalVector2()
+	{
+		Vector2 result = *this;
+		result.Normalize();
+
+		return result;
+	}
+
 
 	float _x;
 	float _y;

@@ -19,6 +19,8 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
+Vector2 mousePos;
+
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPWSTR    lpCmdLine,
@@ -161,6 +163,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         program->Update();
         InvalidateRect(hWnd, nullptr, true); // WM_PAINT 메시지와 관련된 얘
+    }
+    break;
+
+    case WM_MOUSEMOVE:
+    {
+        mousePos._x = static_cast<float>(LOWORD(lParam));
+        mousePos._y = static_cast<float>(HIWORD(lParam));
     }
     break;
 
