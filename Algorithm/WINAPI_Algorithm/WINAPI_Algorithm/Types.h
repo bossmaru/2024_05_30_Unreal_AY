@@ -9,3 +9,9 @@
 #define SKYCOLOR			RGB(123, 196, 196)
 
 #define LERP(s, e, t)       s + (e - s) * t
+
+// struct HitResult
+// {
+// 	bool IsCollision;
+// 	Vector2 hitPoint;
+// };

@@ -118,6 +118,16 @@ public:
 		return result;
 	}
 
+	bool IsBetween(Vector2 v1, Vector2 v2)
+	{
+		float cross1 = this->Cross(v1);
+		float cross2 = this->Cross(v2);
+
+		bool result = (cross1 * cross2 <= 0);
+
+		return result;
+	}
+
 
 	float _x;
 	float _y;

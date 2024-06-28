@@ -21,7 +21,7 @@ void LineScene::Update()
 	_line2->Update();
 	_line3->Update();
 
-	_line3->contour2(_line1, _line2);
+	_line3->Projection2(_line1, _line2);
 }
 
 void LineScene::Render(HDC hdc)
