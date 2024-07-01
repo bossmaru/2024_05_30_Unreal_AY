@@ -15,15 +15,17 @@ void Bullet::Update()
 {
 	if(_isActive == false) return;
 
-	Attack_Cannon();
-
 	_col->Update();
 	_col->_center += _direction * _speed;
 
 	_col->_center += _downVector;
 	_downVector += Vector2(0, 1) * GRAVITY;
 
-	// bool isOut = IsOut();
+	bool isOut = IsOut();
+	if(isOut)
+	{
+		_isActive = false;
+	}
 	// if (_lifeTime > _delayTime || isOut)
 	// {
 	// 	_lifeTime = 0.0f;
@@ -75,6 +77,7 @@ void Bullet::Attack_Cannon(shared_ptr<Cannon> cannon)
 	// => cannon의 body
 	if (cannon->GetCollider()->IsCollision(_col))
 	{
+		cannon->TakeDamage(_attack);
 		SetActive(false);
 	}
 }

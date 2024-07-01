@@ -19,14 +19,14 @@ public:
 
 	// Attack2
 	void Attack_Cannon();
-	void SetTarget(shared_ptr<Cannon> cannon) { _target = cannon; }
+	void SetTarget(shared_ptr<class Cannon> cannon) { _target = cannon; }
 
 private:
 	bool _isActive = false;
 	shared_ptr<Collider> _col;
 	Vector2 _direction = Vector2(1,0);
 	float _speed = 7.0f;
-
+	float _attack = 1.0f;
 	Vector2 _downVector = Vector2();
 
 	float _lifeTime = 0.0f;

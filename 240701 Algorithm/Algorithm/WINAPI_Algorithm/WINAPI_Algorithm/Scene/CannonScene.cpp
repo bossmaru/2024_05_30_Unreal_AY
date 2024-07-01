@@ -2,6 +2,7 @@
 #include "CannonScene.h"
 #include "Objects/Cannon.h"
 #include "Objects/Bullet.h"
+#include "windows.h"
 
 // 사양서
 // 턴제 포트리스
@@ -13,6 +14,8 @@ CannonScene::CannonScene()
 {
 	_cannon1 = make_shared<Cannon>();
 	_cannon2 = make_shared<Cannon>();
+
+	_cannon1->_isControled = true;
 }
 
 CannonScene::~CannonScene()
@@ -23,28 +26,45 @@ void CannonScene::Update()
 {
 	_cannon1->Update();
 	_cannon2->Update();
-
-	shared_ptr<Cannon> attacker;
-	shared_ptr<Cannon> defender;
-	if (!_cannon1->_isControlled && !_cannon2->_isControlled)
+	for (auto bullet : _cannon1->GetBullets())
 	{
-		shared_ptr<Cannon> defender;
-		if (_turn % 2 == 1)
+		if (bullet->IsActive())
 		{
-			attacker = _cannon1;
-			defender = _cannon2;
+			bullet->Attack_Cannon(_cannon2);
 		}
-		else
+	}
+	for (auto bullet : _cannon2->GetBullets())
+	{
+		if (bullet->IsActive())
 		{
-			attacker = _cannon2;
-			defender = _cannon1;
+			bullet->Attack_Cannon(_cannon1);
 		}
-
-		attacker->_isControlled = true;
-		defender->_isControlled = false;
 	}
 
-
+	if (_cannon1->_isControled)
+	{
+		for (auto bullet : _cannon1->GetBullets())
+		{
+			bullet->Attack_Cannon(_cannon2);
+		}
+		if (_cannon1->_turnOver)
+		{
+			_cannon1->_isControled = false;
+			_cannon2->_isControled = true;
+		}
+	}
+	else if (_cannon2->_isControled)
+	{
+		for (auto bullet : _cannon2->GetBullets())
+		{
+			bullet->Attack_Cannon(_cannon1);
+		}
+		if (_cannon2->_turnOver)
+		{
+			_cannon2->_isControled = false;
+			_cannon1->_isControled = true;
+		}
+	}
 
 	// Attack1
 	//for (auto bullet : _cannon1->GetBullets())
@@ -57,19 +77,6 @@ void CannonScene::Render(HDC hdc)
 {
 	_cannon1->Render(hdc);
 	_cannon2->Render(hdc);
-}
-
-void CannonScene::Battle(shared_ptr<Cannon> attacker, shared_ptr<Cannon> defender)
-{
-
-	for (auto bullet : attacker->GetBullets())
-	{
-		bullet->SetTarget(defender);
-		bullet->Attack_Cannon();
-		defender->TakeDamage();
-	}
-
-	_turn++;
 }
 
 bool CannonScene::End()

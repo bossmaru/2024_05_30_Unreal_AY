@@ -4,13 +4,12 @@
 #include "Objects/Bullet.h"
 
 Cannon::Cannon()
-: _hp(5.0f)
 {
 	_body = make_shared<CircleCollider>(CENTER, 50.0f);
 	_barrel = make_shared<Barrel>();
 	
 
-	for(int i=0;i<10;i++)
+	for(int i=0;i<3;i++)
 	{
 		shared_ptr<Bullet> bullet = make_shared<Bullet>();
 		bullet->SetActive(false);
@@ -26,11 +25,11 @@ Cannon::~Cannon()
 
 void Cannon::Update()
 {
-	if (_isControlled)
+	_turnOver = false;
+	if (_isControled)
 	{
 		Move();
 		Fire();
-		_isControlled = false;
 	}
 
 	if (_isActive == false) return;
@@ -79,6 +78,13 @@ void Cannon::Move()
 
 void Cannon::Fire()
 {
+	if (_bulletCount == _bullets.size())
+	{
+		_bulletCount = 0;
+		_turnOver = true;
+		return;
+	}
+
 	// KEY DOWN
 	if (GetAsyncKeyState(VK_SPACE) & 0x0001)
 	{
@@ -92,17 +98,28 @@ void Cannon::Fire()
 		if (iter != _bullets.end())
 		{
 			(*iter)->Fire(_barrel->GetEndPos(), _barrel->GetDirection());
+			_bulletCount++;
 		}
 	}
-
 }
 
-void Cannon::TakeDamage()
+void Cannon::TakeDamage(float amount)
 {
-	_hp--;
+	_hp -= amount;
 	if (_hp <= 0)
 	{
 		_hp = 0;
 		_isActive = false;
 	}
 }
+
+// ector<shared_ptr<class Bullet>> Cannon::ResetBullets()
+// 
+// 	for (int i = 0; i < 3; i++)
+// 	{
+// 		shared_ptr<Bullet> bullet = make_shared<Bullet>();
+// 		bullet->SetActive(false);
+// 		_bullets.push_back(bullet);
+// 	}
+// 
+// 

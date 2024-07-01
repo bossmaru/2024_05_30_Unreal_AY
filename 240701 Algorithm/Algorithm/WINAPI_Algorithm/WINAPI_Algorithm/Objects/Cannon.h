@@ -1,5 +1,6 @@
 #pragma once
 class Cannon
+
 {
 public:
 	Cannon();
@@ -10,13 +11,16 @@ public:
 
 	void Move();
 	void Fire();
-	void TakeDamage();
+	void TakeDamage(float amount);
 	float getHp() { return _hp; }
 
 	shared_ptr<Collider> GetCollider() { return _body; }
 	vector<shared_ptr<class Bullet>>& GetBullets() { return _bullets; }
+
 	bool _isActive = true;
-	bool _isControlled = false;
+	bool _isControled = false;
+	bool _turnOver = false;
+	int _bulletCount = 0;
 
 private:
 	shared_ptr<Collider> _body;
@@ -25,6 +29,6 @@ private:
 
 	float _angle = 0.0f;
 
-	float _hp;
+	float _hp = 5.0f;
 };
 
