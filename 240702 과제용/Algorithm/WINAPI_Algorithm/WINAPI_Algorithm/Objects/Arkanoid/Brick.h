@@ -13,6 +13,7 @@ public:
 	void Render(HDC hdc);
 
 	void SetPosition(Vector2 pos);
+	bool _shoot = false;
 
 private:
 	// vector<HBRUSH> _brushes;

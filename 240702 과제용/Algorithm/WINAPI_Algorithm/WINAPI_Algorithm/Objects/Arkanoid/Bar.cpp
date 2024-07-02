@@ -15,6 +15,7 @@ Bar::~Bar()
 void Bar::Update()
 {
 	RectCollider::Update();
+	Move();
 }
 
 void Bar::Render(HDC hdc)
@@ -27,10 +28,10 @@ void Bar::Move()
 {
 	if (GetAsyncKeyState(VK_RIGHT))
 	{
-		_center._x += 5.0f;
+		_center._x += 15.0f;
 	}
 	if (GetAsyncKeyState(VK_LEFT))
 	{
-		_center._x -= 5.0f;
+		_center._x -= 15.0f;
 	}
 }

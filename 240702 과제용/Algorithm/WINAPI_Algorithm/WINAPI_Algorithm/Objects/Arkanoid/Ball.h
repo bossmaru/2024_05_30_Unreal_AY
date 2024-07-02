@@ -11,10 +11,12 @@ public:
 
 	void Update();
 	void Render(HDC hdc);
-	void SetDirection(Vector2 direction) { _direction = direction; }
+	Vector2 _direction = Vector2(1, -2).NormalVector2();
+
+	bool _isUsed = false;
+	bool _isActive = false;
 
 private:
-	Vector2 _direction = Vector2(1, -1);
 	HBRUSH _brush;
 	float _speed = 15.0f;
 	bool _start = false;

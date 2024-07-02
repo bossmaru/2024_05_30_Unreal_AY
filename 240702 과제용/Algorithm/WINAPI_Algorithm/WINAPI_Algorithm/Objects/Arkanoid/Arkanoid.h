@@ -15,11 +15,17 @@ public:
 	void Update();
 	void Render(HDC hdc);
 
-	void Collision();
+	void BrickCollision();
+	void BarCollision();
+	void WindowCollision();
+
+	void OutofWindow();
 
 private:
 	vector<vector<shared_ptr<class Brick>>> _bricks;
-	shared_ptr<class Ball> _ball;
+	vector<shared_ptr<class Ball>> _balls;
+	shared_ptr<class Ball> _curBall;
+	// shared_ptr<class Ball> _ball;
 	shared_ptr<class Bar> _bar;
 };
 
