@@ -11,7 +11,9 @@ public:
 
 	void BeginPlay();
 
+	// Find Path 알고리즘
 	void RightHand();
+
 	bool Cango(int y, int x);
 
 	void Update();
@@ -23,7 +25,8 @@ private:
 	int _pathIndex = 0;
 	float  _time = 0.0f;
 
-	Vector2 _dir = Vector2(0, 1);
+	Vector2 _dir = Vector2(0,1);
+
 	shared_ptr<Maze> _maze;
 };
 

@@ -4,47 +4,43 @@
 #include <algorithm>
 #include <stack>
 
-
 using namespace std;
 
 // stack : 팬케이크
 // FILO : First Input Last Out
 
-
 // int
-
-template<typename T, typename Container = vector<int>>
+template <typename T, typename Container = vector<int>>
 class Stack
 {
 public:
 	void push(const T& value)
 	{
-		_stack.push_back(value);
-	}
-
-	bool empty()
-	{
-		return _stack.size() == 0;	
-	}
-
-	const T& top()
-	{
-		return _stack.back();
+		v.push_back(value);
 	}
 
 	void pop()
 	{
-		_stack.pop_back();
+		v.pop_back();
+	}
+
+	bool empty()
+	{
+		return v.size() == 0;
+	}
+
+	const T& top()
+	{
+		return v.back();
 	}
 
 private:
-	Container _stack;
+	Container v;
 };
-
 
 int main()
 {
-	Stack<int> s;
+	stack<int> s;
 
 	s.push(1);
 	s.push(3);
@@ -54,15 +50,12 @@ int main()
 
 	while (true)
 	{
-		if (s.empty())
-		{
+		if(s.empty())
 			break;
-		}
 
 		cout << s.top() << endl;
 		s.pop();
 	}
-
 
 	return 0;
 }

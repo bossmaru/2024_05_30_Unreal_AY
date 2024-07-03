@@ -3,7 +3,7 @@
 
 bool Vector2::operator==(const Vector2& other)
 {
-	return this->_x == other._x && this->_y == other._y;
+	return this->_x == other._x && this->_y == other._y;;
 }
 
 bool Vector2::operator!=(const Vector2& other)

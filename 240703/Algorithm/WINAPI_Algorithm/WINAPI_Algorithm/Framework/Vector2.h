@@ -94,8 +94,8 @@ public:
 		return result;
 	}
 
-	bool operator== (const Vector2& other);
-	bool operator!= (const Vector2& other);
+	bool operator==(const Vector2& other);
+	bool operator!=(const Vector2& other);
 
 	float Length() const;
 	float Distance(Vector2 other) const;
