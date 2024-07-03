@@ -29,9 +29,11 @@ void Bar::Move()
 	if (GetAsyncKeyState(VK_RIGHT))
 	{
 		_center._x += 15.0f;
+		_moving_type = (int)MovingType::RIGHT;
 	}
 	if (GetAsyncKeyState(VK_LEFT))
 	{
 		_center._x -= 15.0f;
+		_moving_type = (int)MovingType::LEFT;
 	}
 }

@@ -2,9 +2,9 @@
 #include "Brick.h"
 
 Brick::Brick()
-: RectCollider(Vector2(), Vector2(BrickWidth * 0.5, BrickHeight * 0.5))
+: RectCollider(Vector2(), Vector2(BRICK_WIDTH * 0.5, BRICK_HEIGHT * 0.5))
 {
-	_brush = CreateSolidBrush(SKYCOLOR);
+	_brush = CreateSolidBrush(PANTON);
 }
 
 Brick::~Brick()

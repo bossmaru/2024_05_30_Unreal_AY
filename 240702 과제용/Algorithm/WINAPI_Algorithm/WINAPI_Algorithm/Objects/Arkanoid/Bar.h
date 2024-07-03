@@ -7,6 +7,13 @@
 class Bar : public RectCollider
 {
 public:
+	enum class MovingType
+	{
+		NONE,
+		LEFT,
+		RIGHT
+	};
+
 	Bar();
 	~Bar();
 
@@ -14,6 +21,8 @@ public:
 	void Render(HDC hdc);
 
 	void Move();
+
+	int _moving_type = 0;
 
 private:
 	HBRUSH _brush;

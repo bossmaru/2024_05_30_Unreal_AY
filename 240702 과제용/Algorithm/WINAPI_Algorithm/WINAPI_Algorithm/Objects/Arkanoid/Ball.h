@@ -1,5 +1,4 @@
 #pragma once
-#include "Bar.h"
 
 #define Ball_Radius 10.0f
 
@@ -13,12 +12,17 @@ public:
 	void Render(HDC hdc);
 	Vector2 _direction = Vector2(1, -2).NormalVector2();
 
+	void BrickCollision(vector<vector<shared_ptr<class Brick>>> bricks);
+	void BarCollision(shared_ptr<class Bar> bar);
+	void BorderCollision(vector<shared_ptr<class Wall>> walls);
+	void OutofWindow(vector<shared_ptr<class Wall>> walls);
+
 	bool _isUsed = false;
 	bool _isActive = false;
+	float _speed = 12.0f;
+	bool _start = false;
 
 private:
 	HBRUSH _brush;
-	float _speed = 15.0f;
-	bool _start = false;
 };
 

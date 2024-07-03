@@ -1,7 +1,8 @@
 #pragma once
 
-#define BrickWidth  WIN_WIDTH * 0.1
-#define BrickHeight 25.0f
+#define BRICK_WIDTH  WIN_WIDTH * 0.06f
+#define BRICK_HEIGHT 25.0f
+
 
 class Brick : public RectCollider
 {
