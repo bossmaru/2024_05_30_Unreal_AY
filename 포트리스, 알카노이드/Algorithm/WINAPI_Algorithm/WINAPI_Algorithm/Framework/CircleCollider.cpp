@@ -18,7 +18,7 @@ void CircleCollider::Update()
 void CircleCollider::Render(HDC hdc)
 {
 	SelectObject(hdc, _curPen);
-	SelectObject(hdc, CreateSolidBrush(RGB(255, 255, 255)));
+	// SelectObject(hdc, CreateSolidBrush(RGB(255, 255, 255)));
 
 	int left = _center._x - _radius;
 	int top = _center._y - _radius;

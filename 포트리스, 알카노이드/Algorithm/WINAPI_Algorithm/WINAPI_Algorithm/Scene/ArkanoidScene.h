@@ -1,4 +1,6 @@
 #pragma once
+#include "Objects/Arkanoid/PlaySetting.h"
+
 class ArkanoidScene : public Scene
 {
 public:
@@ -10,6 +12,6 @@ public:
 
 private:
 	shared_ptr<class ArkPlayer> _player;
-	shared_ptr<class Border> _border;
+	shared_ptr<PlaySetting> _playSetting;
 };
 

@@ -1,4 +1,12 @@
 #pragma once
+
+enum class ItemType
+{
+	LongBar,
+	DoubleBall,
+	TripleBall,
+};
+
 class Item : public CircleCollider
 {
 public:
@@ -8,7 +16,12 @@ public:
 	void Update();
 	void Render(HDC hdc);
 
+	void SetItemType(ItemType itemType);
+	ItemType GetItemType() { return _itemType; }
+
 private:
-	// vector<HBRUSH> _brushes;
+	ItemType _itemType;
+	vector<HBRUSH> _brushes;
 };
+
 

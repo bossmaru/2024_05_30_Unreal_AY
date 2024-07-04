@@ -18,6 +18,8 @@ public:
 	float Top() { return _center._y - _halfSize._y; }
 	float Bottom() { return _center._y + _halfSize._y; }
 
+	void ChangeSize(Vector2 halfSize) { _halfSize = halfSize; }
+
 public:
 	Vector2 _halfSize;
 };

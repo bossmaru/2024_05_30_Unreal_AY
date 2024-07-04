@@ -175,7 +175,7 @@
     <ClInclude Include="Types.h" />
     <ClInclude Include="Objects\Arkanoid\Wall.h" />
     <ClInclude Include="WINAPI_Algorithm.h" />
-    <ClInclude Include="Objects\Arkanoid\Border.h" />
+    <ClInclude Include="Objects\Arkanoid\PlaySetting.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Objects\Arkanoid\Item.cpp" />
@@ -212,7 +212,7 @@
     <ClCompile Include="Objects\StatBar.cpp" />
     <ClCompile Include="Objects\Arkanoid\Wall.cpp" />
     <ClCompile Include="WINAPI_Algorithm.cpp" />
-    <ClCompile Include="Objects\Arkanoid\Border.cpp" />
+    <ClCompile Include="Objects\Arkanoid\PlaySetting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WINAPI_Algorithm.rc" />

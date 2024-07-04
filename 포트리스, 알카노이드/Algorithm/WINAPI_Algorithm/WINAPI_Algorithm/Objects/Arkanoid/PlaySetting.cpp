@@ -1,9 +1,10 @@
 #include "pch.h"
-#include "Border.h"
+#include "PlaySetting.h"
 #include "Brick.h"
 #include "Wall.h"
+#include "Item.h"
 
-Border::Border()
+PlaySetting::PlaySetting()
 {
 	shared_ptr<Wall> left_wall = make_shared<Wall>();
 	shared_ptr<Wall> right_wall = make_shared<Wall>();
@@ -34,17 +35,19 @@ Border::Border()
 		_bricks.push_back(_bricks_X);
 	}
 
+	SetItems();
+
 	_brushes.push_back(CreateSolidBrush(PANTON));
 	_brushes.push_back(CreateSolidBrush(SKYCOLOR));
 }
 
-Border::~Border()
+PlaySetting::~PlaySetting()
 {
 	for (auto brush : _brushes)
 		DeleteObject(brush);
 }
 
-void Border::Update()
+void PlaySetting::Update()
 {
 	for (auto wall : _walls)
 	{
@@ -59,7 +62,7 @@ void Border::Update()
 	}
 }
 
-void Border::Render(HDC hdc)
+void PlaySetting::Render(HDC hdc)
 {
 	for (auto wall : _walls)
 	{
@@ -73,6 +76,48 @@ void Border::Render(HDC hdc)
 			{
 				brick->Render(hdc);
 			}
+			if (brick->_item)
+				brick->_item->Render(hdc);
+		}
+	}
+}
+
+void PlaySetting::SetItems()
+{
+	for (int i = 0; i < Item_LongBar_Count; i++)
+	{
+		shared_ptr<Item> item = make_shared<Item>();
+		item->SetItemType(ItemType::LongBar);
+
+		int rand_x = rand() % BRICK_COUNT_X;
+		int rand_y = rand() % BRICK_COUNT_Y;
+
+		_bricks[rand_y][rand_x]->SetItem(item);
+	}
+	for (int i = 0; i < Item_DoubleBall_Count; i++)
+	{
+		shared_ptr<Item> item = make_shared<Item>();
+		item->SetItemType(ItemType::DoubleBall);
+
+		int rand_x = rand() % BRICK_COUNT_X;
+		int rand_y = rand() % BRICK_COUNT_Y;
+
+		if (_bricks[rand_y][rand_x]->_item == nullptr)
+		{
+			_bricks[rand_y][rand_x]->SetItem(item);
+		}
+	}
+	for (int i = 0; i < Item_TripleBall_Count; i++)
+	{
+		shared_ptr<Item> item = make_shared<Item>();
+		item->SetItemType(ItemType::TripleBall);
+
+		int rand_x = rand() % BRICK_COUNT_X;
+		int rand_y = rand() % BRICK_COUNT_Y;
+
+		if (_bricks[rand_y][rand_x]->_item == nullptr)
+		{
+			_bricks[rand_y][rand_x]->SetItem(item);
 		}
 	}
 }

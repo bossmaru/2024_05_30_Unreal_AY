@@ -19,7 +19,7 @@ public:
 
 	bool _isUsed = false;
 	bool _isActive = false;
-	float _speed = 12.0f;
+	float _speed = 9.0f;
 	bool _start = false;
 
 private:

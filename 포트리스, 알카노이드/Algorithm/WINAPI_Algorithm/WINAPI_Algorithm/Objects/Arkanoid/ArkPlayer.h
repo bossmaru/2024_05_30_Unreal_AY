@@ -2,7 +2,7 @@
 
 #include "Brick.h"
 
-#define BALL_COUNT				5
+#define BALL_COUNT				20
 
 class ArkPlayer
 {
@@ -13,11 +13,14 @@ public:
 	void Update();
 	void Render(HDC hdc);
 
-	void BallCollision(shared_ptr<class Border> border);
+	void BallCollision(shared_ptr<class PlaySetting> border);
+	void GetItem(vector<vector<shared_ptr<Brick>>> bricks);
+
 
 private:
 	vector<shared_ptr<class Ball>> _balls;
 	shared_ptr<class Ball> _curBall;
+	vector< shared_ptr<class Ball>> _bonusBalls;
 	shared_ptr<class Bar> _bar;
 };
 

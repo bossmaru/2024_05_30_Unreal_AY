@@ -96,7 +96,7 @@
     <ClInclude Include="Objects\StatBar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Arkanoid\Border.h">
+    <ClInclude Include="Objects\Arkanoid\PlaySetting.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Arkanoid\Wall.h">
@@ -176,7 +176,7 @@
     <ClCompile Include="Objects\StatBar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Arkanoid\Border.cpp">
+    <ClCompile Include="Objects\Arkanoid\PlaySetting.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Arkanoid\Wall.cpp">

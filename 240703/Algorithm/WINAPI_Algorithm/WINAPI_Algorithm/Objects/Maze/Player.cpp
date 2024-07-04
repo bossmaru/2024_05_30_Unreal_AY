@@ -38,11 +38,11 @@ void Player::RightHand()
 
 	Vector2 pos = _pos;
 	_path.push_back(pos);
-	Vector2 endPos = Vector2(23,23);
+	Vector2 endPos = Vector2(23, 23);
 
 	Direction dir = Direction::BOTTOM;
 
-	Vector2 frontPos[4] = 
+	Vector2 frontPos[4] =
 	{
 		Vector2 {0,-1}, // UP
 		Vector2 {-1,0}, // LEFT
@@ -52,7 +52,7 @@ void Player::RightHand()
 
 	while (true)
 	{
-		if(pos == endPos)
+		if (pos == endPos)
 			break;
 		//          (0   - 1  + 4) % 4 = 0
 		// % 알고리즘에서 순환구조에서 많이 쓰인다.
@@ -82,6 +82,37 @@ void Player::RightHand()
 			dir = static_cast<Direction>((dir + 1 + DIR_COUNT) % DIR_COUNT);
 		}
 	}
+
+	stack<Vector2> s;
+
+	for (int i = 0; i < _path.size() - 1; i++)
+	{
+		if (s.empty() == false && s.top() == _path[i + 1])
+		{
+			s.pop();
+		}
+		else
+		{
+			s.push(_path[i]);
+		}
+	}
+
+	s.push(_path.back());
+
+	_path.clear();
+
+	while (true)
+	{
+		if (s.empty())
+		{
+			break;
+		}
+
+		_path.push_back(s.top());
+		s.pop();
+	}
+
+	std::reverse(_path.begin(), _path.end());
 }
 
 bool Player::Cango(int y, int x)
