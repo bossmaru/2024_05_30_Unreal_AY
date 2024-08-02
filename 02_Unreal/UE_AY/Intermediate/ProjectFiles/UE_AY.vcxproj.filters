@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\UE_AY.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\UE_AY.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\UE_AYEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.vsconfig" />
+    <None Include="..\..\ReadMe.txt" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\UE_AY">
+      <UniqueIdentifier>{ED1F54AF-912B-3424-B65C-148D58B7D163}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\UE_AY\MyActor.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyActor.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyAnimInstance.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyAnimInstance.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyCharacter.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyCharacter.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyGameInstance.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyGameInstance.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyGameModeBase.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyGameModeBase.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyHpBar.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyHpBar.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyInventory.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyInventory.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyInventoryComponent.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyInventoryComponent.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyItem.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyItem.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyJumpButton.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyJumpButton.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyPawn.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyPawn.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyPlayerController.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyPlayerController.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyStatComponent.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyStatComponent.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <None Include="..\..\Source\UE_AY\UE_AY.Build.cs">
+      <Filter>Source\UE_AY</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\UE_AY\UE_AY.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\UE_AY.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

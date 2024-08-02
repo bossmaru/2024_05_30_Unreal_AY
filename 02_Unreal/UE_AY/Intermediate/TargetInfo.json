@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "UE_AY",
+			"Path": "..\\Source\\UE_AY.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "UE_AYEditor",
+			"Path": "..\\Source\\UE_AYEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
