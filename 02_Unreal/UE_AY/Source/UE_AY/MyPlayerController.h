@@ -17,10 +17,15 @@ class UE_AY_API AMyPlayerController : public APlayerController
 public:
 	AMyPlayerController();
 
+	void ShowUI();
+	void HideUI();
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	class UInputMappingContext* _inputMappingContext;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	class APawn* _myPawn;
 protected:
 	virtual void BeginPlay() override;
 };

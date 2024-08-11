@@ -12,9 +12,12 @@ class UInputAction;
 class UInputMappingContext;
 struct FInputActionValue;
 
-DECLARE_DELEGATE(DelegateTest1);
-DECLARE_DELEGATE_OneParam(DelegateTestOneParam, int32);
-DECLARE_DELEGATE_TwoParams(DelegateTestTwoParams, int32 hp, int32 mp);
+DECLARE_MULTICAST_DELEGATE(AttackEndedDelegate);
+
+DECLARE_MULTICAST_DELEGATE(ViewInventoryDelegate);
+DECLARE_MULTICAST_DELEGATE(AddItemToInventory);
+DECLARE_MULTICAST_DELEGATE(DropItemFromInventory);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FAttackHitEventDelegate);
 
 UCLASS()
 class UE_AY_API AMyCharacter : public ACharacter
@@ -30,18 +33,10 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void PostInitializeComponents() override;
 
-	void Move(const FInputActionValue& value);
-	void Look(const FInputActionValue& value);
-	void JumpA(const FInputActionValue& value);
-	void AttackA(const FInputActionValue& value);
-	void ViewInventory(const FInputActionValue& value);
-	void TryGetItem(const FInputActionValue& value);
-	void TryGetItemEnd(const FInputActionValue& value);
-
-	void Init();
+	virtual void Init();
 
 	UFUNCTION()
-	void Disable();
+	virtual void Disable();
 
 public:
 	// Called every frame
@@ -57,33 +52,9 @@ public:
 	UFUNCTION()
 	void AttackHit();
 
-	void AddItem(class AMyItem* item);
-	void DropItem(const FInputActionValue& value);
-
 	int GetCurHp() { return _statComponent->GetHp(); }
 
 	void AddAttackDamage(AActor* actor, int amount);
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* _moveAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* _lookAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* _jumpAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* _attackAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* _getItemAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* _dropItemAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* _viewInventoryAction;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	bool _tryGetItem = false;
@@ -100,18 +71,11 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	float _horizontal = 0.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent* _springArm;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* _camera;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = AttackHit, meta = (AllowPrivateAccess = "true"))
+	FVector _hitPoint;
 
 	// Animation
 	class UMyAnimInstance* _animInstance;
-	class AMyGameModeBase* _gameModeBase;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (AllowPrivateAccess = "true"))
-	class UMyInventoryComponent* _inventoryComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UMyStatComponent* _statComponent;
@@ -119,11 +83,25 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UWidgetComponent* _hpBarWidget;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = AI, meta = (AllowPrivateAccess = "true"))
+	class AAIController* _aiController;
+
+	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Niagara, meta = (AllowPrivateAccess = "true"))
+	// class UNiagaraSystem* _vfx;
+
 	// Stat
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat, meta = (AllowPrivateAccess = "true"))
 	int32 _level = 1;
 
-	// DelegateTest1 _myDelegate1;
-	// DelegateTestOneParam _myDelegate2;
-	// DelegateTestTwoParams _myDelegate3;
+	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Particle, meta = (AllowPrivateAccess = "true"))
+	// class UParticleSystem* _particle;
+	
+	AttackEndedDelegate _attackEndedDelegate;
+
+	UPROPERTY(EditAnywhere, BlueprintAssignable, Category = Event, meta = (AllowPrivateAccess = "true"))
+	FAttackHitEventDelegate _attackHitEventDelegate;
+
+	ViewInventoryDelegate _viewInventoryDelegate;
+	AddItemToInventory _addItemToInventoryDelegate;
+	DropItemFromInventory _dropItemFromInventoryDelegate;
 };

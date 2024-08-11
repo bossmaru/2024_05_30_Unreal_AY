@@ -21,7 +21,15 @@ public:
 	virtual void BeginPlay() override;
 
 	void SpawnMonsters();
-	void SetInventoryWidget();
+
+	UFUNCTION()
+	void ViewInventory();
+
+	UFUNCTION()
+	void AddItemToInventory();
+
+	UFUNCTION()
+	void DropItemFromInventory();
 
 	UPROPERTY()
 	UClass* _monsterClass;
@@ -29,9 +37,10 @@ public:
 	UPROPERTY()
 	TArray<class AMyCharacter*> _monsters;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<UUserWidget> _inventoryWidgetClass;
+	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	// TSubclassOf<UUserWidget> _inventoryWidgetClass;
+	//UCLASS 매크로가 있고, UObject를 상속받는 클래스 자체를 저장할 수 있는 변수 자료형
 
-	UPROPERTY()
-	class UUserWidget* _inventoryWidget;
+	// UPROPERTY()
+	// class UMyInventoryComponent* _inventoryComponent;
 };

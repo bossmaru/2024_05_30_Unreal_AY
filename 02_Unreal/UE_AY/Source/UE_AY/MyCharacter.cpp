@@ -2,22 +2,22 @@
 
 
 #include "MyCharacter.h"
-#include "EnhancedInputComponent.h"
-#include "EnhancedInputSubsystems.h"
-#include "InputActionValue.h"
 #include "Components/CapsuleComponent.h"
-#include "GameFramework/SpringArmComponent.h"
-#include "Camera/CameraComponent.h"
 #include "MyAnimInstance.h"
 #include "Engine/DamageEvents.h"
 #include "GameFramework/Controller.h"
-#include "MyInventoryComponent.h"
 #include "MyStatComponent.h"
 #include "Components/WidgetComponent.h"
 #include "MyHpBar.h"
 #include "MyInventory.h"
 #include "MyGameModeBase.h"
 #include "MyItem.h"
+#include "MyAIController.h"
+#include "MyEffectManager.h"
+#include "MyGameInstance.h"
+
+// #include "NiagaraComponent.h"
+// #include "NiagaraFunctionLibrary.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -38,18 +38,6 @@ AMyCharacter::AMyCharacter()
 
 	GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, -88.0f), FRotator(0.0f, -90.0f, 0.0f));
 
-	_springArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
-	_camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-
-	// 상속관계 설정
-	_springArm->SetupAttachment(GetCapsuleComponent());
-	_camera->SetupAttachment(_springArm);
-
-	_springArm->TargetArmLength = 500.0f;
-	_springArm->SetRelativeRotation(FRotator(-35.0f, 0.0f, 0.0f));
-
-	_inventoryComponent = CreateDefaultSubobject<UMyInventoryComponent>(TEXT("InventoryComponent"));
-
 	_statComponent = CreateDefaultSubobject<UMyStatComponent>(TEXT("StatComponent"));
 
 	_hpBarWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("HpBar"));
@@ -63,6 +51,20 @@ AMyCharacter::AMyCharacter()
 	{
 		_hpBarWidget->SetWidgetClass(hpBar.Class);
 	}
+
+	APawn::AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
+
+	// static ConstructorHelpers::FObjectFinder<UParticleSystem> pt(TEXT("/Script/Engine.ParticleSystem'/Game/ParagonSunWukong/FX/Particles/Wukong/Skins/GreatSage/FX/P_Wukong_GreatSage_DJE_CloudBurst.P_Wukong_GreatSage_DJE_CloudBurst'"));
+	// if (pt.Succeeded())
+	// {
+	// 	_particle = pt.Object;
+	// }
+
+	// static ConstructorHelpers::FObjectFinder<UNiagaraSystem> vfx(TEXT("/Script/Niagara.NiagaraSystem'/Game/MegaMagicVFXBundle/VFX/MagicalExplosionsVFX/VFX/MagicalExplosion/Systems/N_MagicalExplosion.N_MagicalExplosion'"));
+	// if (vfx.Succeeded())
+	// {
+	// 	_vfx = vfx.Object;
+	// }
 }
 
 // Called when the game starts or when spawned
@@ -71,6 +73,10 @@ void AMyCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	Init();
+
+	// UNiagaraComponent* nc = UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), _vfx, GetActorLocation());
+	// UNiagaraComponent* nc = UNiagaraFunctionLibrary::SpawnSystemAttached(_vfx, _statComponent, NAME_None, GetActorLocation(), FRotator::ZeroRotator, EAttachLocation::Type::KeepWorldPosition, true);
+
 }
 
 void AMyCharacter::PostInitializeComponents()
@@ -86,8 +92,6 @@ void AMyCharacter::PostInitializeComponents()
 		_animInstance->_attackDelegate.AddUObject(this, &AMyCharacter::AttackHit);
 		_animInstance->_deathDelegate.AddUObject(this, &AMyCharacter::Disable);
 	}
-
-	_gameModeBase = Cast<AMyGameModeBase>(GetWorld()->GetAuthGameMode());
 
 	_statComponent->SetLevelAndInit(_level);
 
@@ -119,31 +123,6 @@ void AMyCharacter::Tick(float DeltaTime)
 void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
-	{
-		// Moving
-		EnhancedInputComponent->BindAction(_moveAction, ETriggerEvent::Triggered, this, &AMyCharacter::Move);
-
-		// Looking
-		EnhancedInputComponent->BindAction(_lookAction, ETriggerEvent::Triggered, this, &AMyCharacter::Look);
-
-		// Jumping
-		EnhancedInputComponent->BindAction(_jumpAction, ETriggerEvent::Started, this, &AMyCharacter::JumpA);
-
-		// Attack
-		EnhancedInputComponent->BindAction(_attackAction, ETriggerEvent::Triggered, this, &AMyCharacter::AttackA);
-		
-		// Get Item
-		EnhancedInputComponent->BindAction(_getItemAction, ETriggerEvent::Started, this, &AMyCharacter::TryGetItem);
-		EnhancedInputComponent->BindAction(_getItemAction, ETriggerEvent::Completed, this, &AMyCharacter::TryGetItemEnd);
-
-		// Drop Item
-		EnhancedInputComponent->BindAction(_dropItemAction, ETriggerEvent::Started, this, &AMyCharacter::DropItem);
-
-		// View Inventory
-		EnhancedInputComponent->BindAction(_viewInventoryAction, ETriggerEvent::Started, this, &AMyCharacter::ViewInventory);
-	}
 }
 
 float AMyCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
@@ -162,6 +141,7 @@ float AMyCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AC
 void AMyCharacter::OnAttackEnded(UAnimMontage* Montage, bool binterrupted)
 {
 	_isAttacking = false;
+	_attackEndedDelegate.Broadcast();
 }
 
 void AMyCharacter::AttackHit()
@@ -170,123 +150,60 @@ void AMyCharacter::AttackHit()
 
 	// 나는 무시해라
 	FCollisionQueryParams params (NAME_None, false, this);
-	float attackRange = 500.0f;
-	float attackRadius = 50.0f;
+	float attackRange = 1000.0f;
+	float attackRadius = 30.0f;
+	FVector forward = GetActorForwardVector();
+	FQuat quat = FQuat::FindBetweenVectors(FVector(0, 0, 1), forward);
+	// FQuat quat = FRotationMatrix::MakeFromZ(forward).ToQuat();
+
+	FVector center = GetActorLocation() + forward * attackRange * 0.5f;
+	FVector start = GetActorLocation() + attackRange;
+	FVector end = GetActorLocation() + forward * attackRange;
+
 	bool bResult = GetWorld()->SweepSingleByChannel
 	(
 		hitResult,
-		GetActorLocation(),
-		GetActorLocation() + GetActorForwardVector() * attackRange,
-		FQuat::Identity,
+		start,
+		end,
+		// FQuat::Identity,
+		quat,
 		ECollisionChannel::ECC_GameTraceChannel2,
-		FCollisionShape::MakeSphere(attackRadius),
+		// FCollisionShape::MakeSphere(attackRadius),
+		FCollisionShape::MakeCapsule(attackRadius, attackRange * 0.5f),
 		params
 	);
-
-	FVector vec = GetActorForwardVector() * attackRange;
-	// UE_LOG(LogTemp, Log, TEXT("%s"), *vec.ToString());
-	FVector center = GetActorLocation() + vec * 0.5f;
 
 	FColor drawColor = FColor::Green;
 
 	if (bResult && hitResult.GetActor()->IsValidLowLevel())
 	{
-		// TODO
-		FDamageEvent damageEvent;
-		hitResult.GetActor()->TakeDamage(_statComponent->GetAttackDamage(), damageEvent, GetController(), this);
+		AMyCharacter* target = Cast<AMyCharacter>(hitResult.GetActor());
+		if (target)
+		{
+			FDamageEvent damageEvent;
+			hitResult.GetActor()->TakeDamage(_statComponent->GetAttackDamage(), damageEvent, GetController(), this);
+			_hitPoint = hitResult.ImpactPoint;
+			EffectManager->Play("P_Wukong_GreatSage_DJO_Radius", _hitPoint);
+			// _attackHitEventDelegate.Broadcast();
 
-		drawColor = FColor::Red;
+			DrawDebugCapsule(GetWorld(), center, attackRange * 0.5f, attackRadius, quat, FColor::Red, false, 2.0f);
+		}
+		// hitPoint.Z /= 4;
+		// if (_particle)
+		// {
+		// 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), _particle, hitPoint, FRotator::ZeroRotator);
+		// }
+
+		// drawColor = FColor::Red;
+
+		else
+		{
+			DrawDebugCapsule(GetWorld(), center, attackRange * 0.5f, attackRadius, quat, FColor::Green, false, 2.0f);
+		}
 	}
 
-	DrawDebugSphere(GetWorld(), center, attackRadius, 12, drawColor, false, 2.0f);
-}
-
-void AMyCharacter::Move(const FInputActionValue& value)
-{
-	FVector2D MovementVector = value.Get<FVector2D>();
-	if (Controller != nullptr)
-	{
-		// add movement 
-		_vertical = MovementVector.Y;
-		_horizontal = MovementVector.X;
-
-
-		AddMovementInput(GetActorForwardVector(), MovementVector.Y);
-		AddMovementInput(GetActorRightVector(), MovementVector.X);
-	}
-}
-
-void AMyCharacter::Look(const FInputActionValue& value)
-{
-	FVector2D LookAxisVector = value.Get<FVector2D>();
-	if (Controller != nullptr)
-	{
-		// add yaw and pitch input to controller
-		AddControllerYawInput(LookAxisVector.X);
-	}
-}
-
-void AMyCharacter::JumpA(const FInputActionValue& value)
-{
-	bool isPressed = value.Get<bool>();
-
-	if (isPressed)
-	{
-		ACharacter::Jump();
-	}
-}
-
-void AMyCharacter::AttackA(const FInputActionValue& value)
-{
-	bool isPressed = value.Get<bool>();
-
-	if (isPressed && _isAttacking == false && _animInstance != nullptr)
-	{
-		_animInstance->PlayAttackMontage();
-		_isAttacking = true;
-
-		_curAttackIndex %= 3;
-		_curAttackIndex++;
-		_animInstance->JumpToSection(_curAttackIndex);
-	}
-}
-
-void AMyCharacter::ViewInventory(const FInputActionValue& value)
-{
-	bool isPressed = value.Get<bool>();
-
-	if (isPressed)
-	{
-		UMyInventory* inventory = Cast<UMyInventory>(_gameModeBase->_inventoryWidget);
-		inventory->ToggleVisiblity();
-	}
-}
-
-void AMyCharacter::TryGetItem(const FInputActionValue& value)
-{
-	_tryGetItem = true;
-}
-
-void AMyCharacter::TryGetItemEnd(const FInputActionValue& value)
-{
-	_tryGetItem = false;
-}
-
-void AMyCharacter::AddItem(AMyItem* item)
-{
-	_inventoryComponent->AddItem(item);
-	_statComponent->AddAttackDamage(30.0f);
-}
-
-void AMyCharacter::DropItem(const FInputActionValue& value)
-{
-	bool isPressed = value.Get<bool>();
-
-	if (isPressed)
-	{
-		_inventoryComponent->DropItem();
-		_statComponent->AddAttackDamage(-30.0f);
-	}
+	else
+		DrawDebugCapsule(GetWorld(), center, attackRange * 0.5f, attackRadius, quat, FColor::Green, false, 2.0f);
 }
 
 void AMyCharacter::AddAttackDamage(AActor* actor, int amount)
@@ -301,6 +218,11 @@ void AMyCharacter::Init()
 	SetActorEnableCollision(true);
 	// SetActorTickEnabled(true);
 	PrimaryActorTick.bCanEverTick = true;
+
+	if (_aiController && GetController() == nullptr)
+	{
+		_aiController->Possess(this);
+	}
 }
 
 void AMyCharacter::Disable()
@@ -309,5 +231,11 @@ void AMyCharacter::Disable()
 	SetActorEnableCollision(false); // 충돌 비활성화
 	// SetActorTickEnabled(false); // Tick 비활성화
 	PrimaryActorTick.bCanEverTick = false;
+
+	auto controller = GetController();
+	if (controller)
+	{
+		GetController()->UnPossess();
+	}
 }
 

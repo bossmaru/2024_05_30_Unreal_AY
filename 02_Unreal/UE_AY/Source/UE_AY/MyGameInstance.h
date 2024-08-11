@@ -10,6 +10,10 @@
 /**
  * 
  */
+
+#define UIManager Cast<UMyGameInstance>(GetGameInstance())->GetUIManager()
+#define EffectManager Cast<UMyGameInstance>(GetGameInstance())->GetEffectManager()
+
 UCLASS()
 class UE_AY_API UMyGameInstance : public UGameInstance
 {
@@ -22,7 +26,16 @@ public:
 
 	FMyStatData* GetStatDataByLevel(int level);
 
+	class AMyUIManager* GetUIManager() { return _uiManager; };
+	class AMyEffectManager* GetEffectManager() { return _effectManager; };
+
 private:
 	UPROPERTY()
 	class UDataTable* _statTable;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	class AMyUIManager* _uiManager;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	class AMyEffectManager* _effectManager;
 };

@@ -7,6 +7,19 @@
 
 AMyPlayerController::AMyPlayerController()
 {
+	_myPawn = GetPawn();
+}
+
+void AMyPlayerController::ShowUI()
+{
+	bShowMouseCursor = true;
+	Possess(_myPawn);
+}
+
+void AMyPlayerController::HideUI()
+{
+	bShowMouseCursor = false;
+	UnPossess();
 }
 
 void AMyPlayerController::BeginPlay()

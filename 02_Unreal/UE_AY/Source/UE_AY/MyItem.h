@@ -6,6 +6,20 @@
 #include "GameFramework/Actor.h"
 #include "MyItem.generated.h"
 
+// USTRUCT()
+// struct ItemType
+// {
+// 
+// };
+// 
+// 
+// USTRUCT()
+// struct ItemInfo
+// {
+// 	int itemId;
+// 	ItemType type;
+// };
+// 
 UCLASS()
 class UE_AY_API AMyItem : public AActor
 {
@@ -43,5 +57,11 @@ public:
 	bool _isOverlapped;
 
 	UPROPERTY()
-	class AMyCharacter* _myCharacter;
+	class AMyPlayer* _player;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+	class UTexture2D* _itemTexture;
+
+	UPROPERTY(VisibleAnywhere)
+	int32 _itemId = -1;
 };

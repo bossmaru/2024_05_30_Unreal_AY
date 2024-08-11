@@ -24,6 +24,8 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	void AddItem(class AMyItem* item);
+
+	UFUNCTION()
 	void DropItem();
 
 	UPROPERTY()

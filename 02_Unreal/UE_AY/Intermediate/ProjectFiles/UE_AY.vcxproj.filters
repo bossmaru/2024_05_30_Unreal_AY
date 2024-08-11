@@ -31,10 +31,40 @@
     <Filter Include="Source\UE_AY">
       <UniqueIdentifier>{ED1F54AF-912B-3424-B65C-148D58B7D163}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\UE_AY\BT_Deco_CanAttack.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\BT_Deco_CanAttack.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\BT_Service_FindTarget.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\BT_Service_FindTarget.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\BT_Task_Attack.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\BT_Task_Attack.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\BT_Task_FindRandomPos.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\BT_Task_FindRandomPos.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\UE_AY\MyActor.cpp">
       <Filter>Source\UE_AY</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\UE_AY\MyActor.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyAIController.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyAIController.h">
       <Filter>Source\UE_AY</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\UE_AY\MyAnimInstance.cpp">
@@ -47,6 +77,12 @@
       <Filter>Source\UE_AY</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\UE_AY\MyCharacter.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyEffectManager.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyEffectManager.h">
       <Filter>Source\UE_AY</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\UE_AY\MyGameInstance.cpp">
@@ -91,10 +127,22 @@
     <ClInclude Include="..\..\Source\UE_AY\MyJumpButton.h">
       <Filter>Source\UE_AY</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyMonster.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyMonster.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\UE_AY\MyPawn.cpp">
       <Filter>Source\UE_AY</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\UE_AY\MyPawn.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyPlayer.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyPlayer.h">
       <Filter>Source\UE_AY</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\UE_AY\MyPlayerController.cpp">
@@ -103,10 +151,22 @@
     <ClInclude Include="..\..\Source\UE_AY\MyPlayerController.h">
       <Filter>Source\UE_AY</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MySoundManager.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MySoundManager.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\UE_AY\MyStatComponent.cpp">
       <Filter>Source\UE_AY</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\UE_AY\MyStatComponent.h">
+      <Filter>Source\UE_AY</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\UE_AY\MyUIManager.cpp">
+      <Filter>Source\UE_AY</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\UE_AY\MyUIManager.h">
       <Filter>Source\UE_AY</Filter>
     </ClInclude>
     <None Include="..\..\Source\UE_AY\UE_AY.Build.cs">

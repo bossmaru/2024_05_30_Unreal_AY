@@ -2,6 +2,8 @@
 
 
 #include "MyGameInstance.h"
+#include "MyUIManager.h"
+#include "MyEffectManager.h"
 
 UMyGameInstance::UMyGameInstance()
 {
@@ -21,6 +23,13 @@ void UMyGameInstance::Init()
 
 	auto statData = GetStatDataByLevel(2);
 	UE_LOG(LogTemp, Warning, TEXT("Level : %d, MaxHp : %d, Attack : %d"), statData->level, statData->maxHp, statData->attack);
+
+	FActorSpawnParameters params;
+	params.Name = TEXT("UIManager");
+	_uiManager = GetWorld()->SpawnActor<AMyUIManager>(FVector::ZeroVector, FRotator::ZeroRotator, params);
+
+	params.Name = TEXT("EffectManager");
+	_effectManager = GetWorld()->SpawnActor<AMyEffectManager>(FVector::ZeroVector, FRotator::ZeroRotator, params);
 }
 
 FMyStatData* UMyGameInstance::GetStatDataByLevel(int level)

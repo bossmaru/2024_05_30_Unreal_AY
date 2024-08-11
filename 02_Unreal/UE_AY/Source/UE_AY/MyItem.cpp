@@ -6,7 +6,7 @@
 #include "Components/SphereComponent.h"
 #include "MyCharacter.h"
 #include "MyInventoryComponent.h"
-#include "MyCharacter.h"
+#include "MyPlayer.h"
 
 // Sets default values
 AMyItem::AMyItem()
@@ -31,6 +31,17 @@ AMyItem::AMyItem()
 	_meshComponent->SetCollisionProfileName(TEXT("MyItem"));
 	_trigger->SetCollisionProfileName(TEXT("MyItem"));
 	_trigger->SetSphereRadius(60.0f);
+
+	static ConstructorHelpers::FObjectFinder<UTexture2D> tex
+	(TEXT("/Script/Engine.Texture2D'/Game/Graphics/Icons/Tex_tools_07.Tex_tools_07'"));
+
+	if (tex.Succeeded())
+	{
+
+		_itemTexture = tex.Object;
+	}
+
+	_itemTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Script/Engine.Texture2D'/Game/Graphics/Icons/Tex_tools_07.Tex_tools_07'"));
 }
 
 // Called when the game starts or when spawned
@@ -51,7 +62,7 @@ void AMyItem::PostInitializeComponents()
 void AMyItem::OnMyCharacterOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	_isOverlapped = true;
-	_myCharacter = Cast<AMyCharacter>(OtherActor);
+	_player = Cast<AMyPlayer>(OtherActor);
 	// auto myCharacter = Cast<AMyCharacter>(OtherActor);
 	// if (myCharacter)
 	// {
@@ -67,9 +78,9 @@ void AMyItem::OnMyCharacterOverlapEnd(UPrimitiveComponent* OverlappedComponent, 
 
 void AMyItem::CharacterOverlapped()
 {
-	if (_myCharacter)
+	if (_player)
 	{
-		_myCharacter->AddItem(this);
+		_player->AddItem(this);
 	}
 }
 
@@ -78,9 +89,10 @@ void AMyItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (_isOverlapped && _myCharacter->_tryGetItem)
+	if (_isOverlapped && _player != nullptr)
 	{
-		CharacterOverlapped();
+		if(_player->_tryGetItem)
+			CharacterOverlapped();
 	}
 }
 

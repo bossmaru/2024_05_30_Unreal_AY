@@ -7,6 +7,8 @@
 #include "Engine/DataTable.h"
 #include "MyStatComponent.generated.h"
 
+DECLARE_MULTICAST_DELEGATE(DeathDelegate);
+
 USTRUCT()
 struct FMyStatData : public FTableRowBase
 {
@@ -53,6 +55,7 @@ public:
 	bool IsDead() { return _curHp <= 0; }
 
 	HpChanged _hpChangedDelegate;
+	DeathDelegate _deathDelegate;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stat)
