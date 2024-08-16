@@ -3,29 +3,29 @@
 #include "string"
 
 World::World()
-: _player(nullptr)
-, _computer(nullptr)
-, _monster(nullptr)
-, _boss(nullptr)
+	: _player(nullptr)
+	, _computer(nullptr)
+	, _monster(nullptr)
+	, _boss(nullptr)
 
 {
 }
 
 World::~World()
 {
-	if(_player != nullptr)
+	if ( _player!=nullptr )
 	{
 		delete _player;
 	}
-	if (_computer != nullptr)
+	if ( _computer!=nullptr )
 	{
 		delete _computer;
 	}
-	if (_monster != nullptr)
+	if ( _monster!=nullptr )
 	{
 		delete _monster;
 	}
-	if (_boss != nullptr)
+	if ( _boss!=nullptr )
 	{
 		delete _boss;
 	}
@@ -33,7 +33,7 @@ World::~World()
 	_players.clear();
 }
 
-// »® »≠∏È... √ ±‚»≠, «√∑π¿Ã Ω√¿€
+// Ìôà ÌôîÎ©¥... Ï¥àÍ∏∞Ìôî, ÌîåÎ†àÏù¥ ÏãúÏûë
 void World::Init()
 {
 	_player = nullptr;
@@ -44,51 +44,51 @@ void World::Init()
 	PlayMode();
 }
 
-// ¿Ã∏ß, ≈¨∑°Ω∫ ¿‘∑¬
+// Ïù¥Î¶Ñ, ÌÅ¥ÎûòÏä§ ÏûÖÎ†•
 void World::Start()
 {
 	int playerNum = 0;
 	string name;
 
-	cout << endl;
-	cout << "------------------------------------------------" << endl;
-	cout << "¿Ã∏ß¿ª ¿‘∑¬«ÿ¡÷ººø‰." << endl;
-	cout << endl;
-	cin >> name;
-	cout << endl;
-	cout << "------------------------------------------------" << endl;
-	cout << "1~3±Ó¡ˆ¿« ≈¨∑°Ω∫∏¶ ¿‘∑¬«ÿ¡÷ººø‰." << endl;
-	cout << "1 : Knight" << endl;
-	cout << "2 : Archer" << endl;
-	cout << "3 : Mage" << endl;
-	cout << endl;
-	cin >> playerNum;
+	cout<<endl;
+	cout<<"------------------------------------------------"<<endl;
+	cout<<"Ïù¥Î¶ÑÏùÑ ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî."<<endl;
+	cout<<endl;
+	cin>>name;
+	cout<<endl;
+	cout<<"------------------------------------------------"<<endl;
+	cout<<"1~3ÍπåÏßÄÏùò ÌÅ¥ÎûòÏä§Î•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî."<<endl;
+	cout<<"1 : Knight"<<endl;
+	cout<<"2 : Archer"<<endl;
+	cout<<"3 : Mage"<<endl;
+	cout<<endl;
+	cin>>playerNum;
 
 	SelectClass(playerNum, name, &_player);
 }
 
 void World::SelectClass(int num, string name, Creature** creature)
 {
-	switch (num)
+	switch ( num )
 	{
 	case PlayerType::KNIGHT:
 	{
-		if (name == "Computer")
+		if ( name=="Computer" )
 		{
-			*creature = new Knight(name, KNIGHT_HP * 1.5, KNIGHT_MP * 1.5, KNIGHT_ATTACK * 2);
+			*creature = new Knight(name, KNIGHT_HP*1.5, KNIGHT_MP*1.5, KNIGHT_ATTACK*2);
 		}
 		else
 		{
 			*creature = new Knight(name, KNIGHT_HP, KNIGHT_MP, KNIGHT_ATTACK);
 		}
-		
+
 		break;
 	}
 	case PlayerType::ARCHER:
 	{
-		if (name == "Computer")
+		if ( name=="Computer" )
 		{
-			*creature = new Archer(name, ARCHER_HP * 1.5, ARCHER_MP * 1.5, ARCHER_ATTACK * 2);
+			*creature = new Archer(name, ARCHER_HP*1.5, ARCHER_MP*1.5, ARCHER_ATTACK*2);
 		}
 		else
 		{
@@ -98,9 +98,9 @@ void World::SelectClass(int num, string name, Creature** creature)
 	}
 	case PlayerType::MAGE:
 	{
-		if (name == "Computer")
+		if ( name=="Computer" )
 		{
-			*creature = new Mage(name, MAGE_HP * 1.5, MAGE_MP * 1.5, MAGE_ATTACK * 2);
+			*creature = new Mage(name, MAGE_HP*1.5, MAGE_MP*1.5, MAGE_ATTACK*2);
 		}
 		else
 		{
@@ -110,8 +110,8 @@ void World::SelectClass(int num, string name, Creature** creature)
 	}
 	default:
 	{
-		cout << endl;
-		cout << "¿ﬂ∏¯µ» ¿‘∑¬¿‘¥œ¥Ÿ." << endl;
+		cout<<endl;
+		cout<<"ÏûòÎ™ªÎêú ÏûÖÎ†•ÏûÖÎãàÎã§."<<endl;
 		break;
 	}
 	}
@@ -122,27 +122,27 @@ void World::PlayMode()
 	bool battleWin = false;
 	int playMode = 0;
 
-	// ¿¸≈ı ¿Ã±Ê ∂ß ±Ó¡ˆ π›∫π
-	while (true)
+	// Ï†ÑÌà¨ Ïù¥Í∏∏ Îïå ÍπåÏßÄ Î∞òÎ≥µ
+	while ( true )
 	{
-		cout << endl;
-		cout << "------------------------------------------------" << endl;
-		cout << "πË∆≤∏µÂ∏¶ ¿‘∑¬«ÿ¡÷ººø‰." << endl;
-		cout << "1 : ¿¸≈ı" << endl;
-		cout << "2 : ªÁ≥…" << endl;
-		cout << endl;
-		cin >> playMode;
+		cout<<endl;
+		cout<<"------------------------------------------------"<<endl;
+		cout<<"Î∞∞ÌãÄÎ™®ÎìúÎ•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî."<<endl;
+		cout<<"1 : Ï†ÑÌà¨"<<endl;
+		cout<<"2 : ÏÇ¨ÎÉ•"<<endl;
+		cout<<endl;
+		cin>>playMode;
 
-		switch (playMode)
+		switch ( playMode )
 		{
 		case PlayMode::BATTLE:
 		{
-			int comNum = rand() % 3 + 1;
+			int comNum = rand()%3+1;
 			SelectClass(comNum, "Computer", &_computer);
-			cout << endl;
-			cout << "------------------------------------------------" << endl;
-			cout << "¿¸≈ı∏¶ Ω√¿€«’¥œ¥Ÿ!" << endl;
-			cout << endl;
+			cout<<endl;
+			cout<<"------------------------------------------------"<<endl;
+			cout<<"Ï†ÑÌà¨Î•º ÏãúÏûëÌï©ÎãàÎã§!"<<endl;
+			cout<<endl;
 			battleWin = Battle();
 			break;
 		}
@@ -150,22 +150,22 @@ void World::PlayMode()
 		{
 			_monsters = {};
 			Hunt();
-			cout << "------------------------------------------------" << endl;
-			cout << "ªÁ≥…¿ª øœ∑·«œø© ∞Ê«Ëƒ°∏¶ »πµÊ«œø¥Ω¿¥œ¥Ÿ!" << endl;
-			cout << endl;
-			cout << "< ∞·∞˙ >" << endl;
-			dynamic_cast<Player*>(_player)->PrintInfo();
+			cout<<"------------------------------------------------"<<endl;
+			cout<<"ÏÇ¨ÎÉ•ÏùÑ ÏôÑÎ£åÌïòÏó¨ Í≤ΩÌóòÏπòÎ•º ÌöçÎìùÌïòÏòÄÏäµÎãàÎã§!"<<endl;
+			cout<<endl;
+			cout<<"< Í≤∞Í≥º >"<<endl;
+			dynamic_cast< Player* >( _player )->PrintInfo();
 			break;
 		}
 		default:
 		{
-			cout << endl;
-			cout << "¿ﬂ∏¯µ» ¿‘∑¬¿‘¥œ¥Ÿ" << endl;
+			cout<<endl;
+			cout<<"ÏûòÎ™ªÎêú ÏûÖÎ†•ÏûÖÎãàÎã§"<<endl;
 			break;
 		}
 		}
 
-		if (battleWin == true)
+		if ( battleWin==true )
 		{
 			BattleWin();
 			break;
@@ -176,12 +176,12 @@ void World::PlayMode()
 bool World::Battle()
 {
 	bool end = false;
-	while (true)
+	while ( true )
 	{
 		_player->PreAttack(_computer);
 		_player->Attack(_computer);
-		dynamic_cast<Player*>(_computer)->PrintInfo();
-		if (_computer->IsDead())
+		dynamic_cast< Player* >( _computer )->PrintInfo();
+		if ( _computer->IsDead() )
 		{
 			end = true;
 			break;
@@ -189,12 +189,12 @@ bool World::Battle()
 
 		_computer->PreAttack(_player);
 		_computer->Attack(_player);
-		dynamic_cast<Player*>(_player)->PrintInfo();
-		if (_player->IsDead())
+		dynamic_cast< Player* >( _player )->PrintInfo();
+		if ( _player->IsDead() )
 		{
-			cout << endl;
-			cout << "¿¸≈ıø°º≠ ∆–πË«œø¥Ω¿¥œ¥Ÿ!" << endl;
-			cout << endl;
+			cout<<endl;
+			cout<<"Ï†ÑÌà¨ÏóêÏÑú Ìå®Î∞∞ÌïòÏòÄÏäµÎãàÎã§!"<<endl;
+			cout<<endl;
 			break;
 		}
 	}
@@ -205,31 +205,31 @@ bool World::Battle()
 void World::Hunt()
 {
 	int monsterType = 0;
-	cout << endl;
-	cout << "------------------------------------------------" << endl;
-	cout << "ªÁ≥…«“ ∏ÛΩ∫≈Õ∏¶ º±≈√«ÿ¡÷ººø‰." << endl;
-	cout << "1 : ∞Ì∫Ì∏∞" << endl;
-	cout << endl;
-	cin >> monsterType;
-	cout << endl;
-	cout << "------------------------------------------------" << endl;
-	cout << "ªÁ≥…¿ª Ω√¿€«’¥œ¥Ÿ!" << endl;
-	cout << endl;
+	cout<<endl;
+	cout<<"------------------------------------------------"<<endl;
+	cout<<"ÏÇ¨ÎÉ•Ìï† Î™¨Ïä§ÌÑ∞Î•º ÏÑ†ÌÉùÌï¥Ï£ºÏÑ∏Ïöî."<<endl;
+	cout<<"1 : Í≥†Î∏îÎ¶∞"<<endl;
+	cout<<endl;
+	cin>>monsterType;
+	cout<<endl;
+	cout<<"------------------------------------------------"<<endl;
+	cout<<"ÏÇ¨ÎÉ•ÏùÑ ÏãúÏûëÌï©ÎãàÎã§!"<<endl;
+	cout<<endl;
 	SelectMonster(monsterType);
 }
 
 void World::SelectMonster(int monsterType)
 {
-	switch (monsterType)
+	switch ( monsterType )
 	{
 	case MonsterType::GOBLIN:
 	{
-		dynamic_cast<Goblin*>(_monster)->Clone(_monsters);
-		dynamic_cast<Monster*>(_monster)->MonstersAttack(dynamic_cast<Player*>(_player), _monsters);
+		dynamic_cast< Goblin* >( _monster )->Clone(_monsters);
+		dynamic_cast< Monster* >( _monster )->MonstersAttack(dynamic_cast< Player* >( _player ), _monsters);
 
-		for (int i = 0; i < MonsterNum::GOBLIN; i++)
+		for ( int i = 0; i<MonsterNum::GOBLIN; i++ )
 		{
-			delete _monsters[i];
+			delete _monsters[ i ];
 		}
 	}
 	}
@@ -237,27 +237,27 @@ void World::SelectMonster(int monsterType)
 
 void World::ClonePlayers()
 {
-	for (int i = 0; i < 10; i++)
+	for ( int i = 0; i<10; i++ )
 	{
-		int classNum = rand() % 3 + 1;
-		int random = rand() % 30 + 1;
-		string playerName = _player->GetName() + " " + to_string(i + 1);
+		int classNum = rand()%3+1;
+		int random = rand()%30+1;
+		string playerName = _player->GetName()+" "+to_string(i+1);
 
-		switch(classNum)
+		switch ( classNum )
 		{
-			case PlayerType::KNIGHT:
+		case PlayerType::KNIGHT:
 		{
-			_players.push_back(new Knight(playerName, _player->GetCurHp() + random, _player->GetCurMp() + random, _player->GetCurAtk() + random));
+			_players.push_back(new Knight(playerName, _player->GetCurHp()+random, _player->GetCurMp()+random, _player->GetCurAtk()+random));
 			break;
 		}
 		case PlayerType::ARCHER:
 		{
-			_players.push_back(new Archer(playerName, _player->GetCurHp() + random, _player->GetCurMp() + random, _player->GetCurAtk() + random));
+			_players.push_back(new Archer(playerName, _player->GetCurHp()+random, _player->GetCurMp()+random, _player->GetCurAtk()+random));
 			break;
 		}
 		case PlayerType::MAGE:
 		{
-			_players.push_back(new Mage(playerName, _player->GetCurHp() + random, _player->GetCurMp() + random, _player->GetCurAtk() + random));
+			_players.push_back(new Mage(playerName, _player->GetCurHp()+random, _player->GetCurMp()+random, _player->GetCurAtk()+random));
 			break;
 		}
 		}
@@ -267,65 +267,65 @@ void World::ClonePlayers()
 void World::BossBattle()
 {
 	ClonePlayers();
-	_boss = new HobGoblin("Boss", HG_HP, HG_MP, HG_ATTACK / _players.size());
-	dynamic_cast<HobGoblin*>(_boss)->AggroAttack(_players);
+	_boss = new HobGoblin("Boss", HG_HP, HG_MP, HG_ATTACK/_players.size());
+	dynamic_cast< HobGoblin* >( _boss )->AggroAttack(_players);
 
-	for (int i = 0; i < _players.size(); i++)
+	for ( int i = 0; i<_players.size(); i++ )
 	{
-		delete _players[i];
+		delete _players[ i ];
 	}
 }
 
 void World::BattleWin()
 {
-	cout << endl;
-	cout << "------------------------------------------------" << endl;
-	cout << "¿¸≈ıø°º≠ Ω¬∏Æ«œø¥Ω¿¥œ¥Ÿ!!!" << endl;
-	cout << endl;
-	cout << "∫∏Ω∫¿¸¿ª Ω√¿€«’¥œ¥Ÿ." << endl;
-	cout << "1 : Y" << endl;
-	cout << "2 : N" << endl;
-	cout << endl;
+	cout<<endl;
+	cout<<"------------------------------------------------"<<endl;
+	cout<<"Ï†ÑÌà¨ÏóêÏÑú ÏäπÎ¶¨ÌïòÏòÄÏäµÎãàÎã§!!!"<<endl;
+	cout<<endl;
+	cout<<"Î≥¥Ïä§Ï†ÑÏùÑ ÏãúÏûëÌï©ÎãàÎã§."<<endl;
+	cout<<"1 : Y"<<endl;
+	cout<<"2 : N"<<endl;
+	cout<<endl;
 	int start = 0;
-	cin >> start;
-	cout << endl;
-	cout << "------------------------------------------------" << endl;
-	switch (start)
+	cin>>start;
+	cout<<endl;
+	cout<<"------------------------------------------------"<<endl;
+	switch ( start )
 	{
-		case(YES):
-		{
-			cout << endl;
-			cout << "√÷¡æ ∫∏Ω∫ µÓ¿Â!!!" << endl;
-			cout << endl;
-			BossBattle();
-			End();
-		}
-		case(NO):
-		{
-			cout << "∞‘¿”¿ª ¡æ∑·«’¥œ¥Ÿ." << endl;
-			cout << endl;
-			break;
-		}
-		default:
-		{
-			cout << endl;
-			cout << "¿ﬂ∏¯µ» ¿‘∑¬¿‘¥œ¥Ÿ" << endl;
-			break;
-		}
+	case( YES ):
+	{
+		cout<<endl;
+		cout<<"ÏµúÏ¢Ö Î≥¥Ïä§ Îì±Ïû•!!!"<<endl;
+		cout<<endl;
+		BossBattle();
+		End();
+	}
+	case( NO ):
+	{
+		cout<<"Í≤åÏûÑÏùÑ Ï¢ÖÎ£åÌï©ÎãàÎã§."<<endl;
+		cout<<endl;
+		break;
+	}
+	default:
+	{
+		cout<<endl;
+		cout<<"ÏûòÎ™ªÎêú ÏûÖÎ†•ÏûÖÎãàÎã§"<<endl;
+		break;
+	}
 	}
 }
 
 void World::End()
 {
 	int restart = 0;
-	cout << endl;
-	cout << "∞‘¿”¿ª ¥ŸΩ√ Ω√¿€«œΩ√∞⁄Ω¿¥œ±Ó? " << endl;
-	cout << "1 : Y" << endl;
-	cout << "2 : N" << endl;
-	cout << endl;
-	cin >> restart;
+	cout<<endl;
+	cout<<"Í≤åÏûÑÏùÑ Îã§Ïãú ÏãúÏûëÌïòÏãúÍ≤†ÏäµÎãàÍπå? "<<endl;
+	cout<<"1 : Y"<<endl;
+	cout<<"2 : N"<<endl;
+	cout<<endl;
+	cin>>restart;
 
-	switch (restart)
+	switch ( restart )
 	{
 	case YES:
 	{
@@ -334,16 +334,16 @@ void World::End()
 	}
 	case NO:
 	{
-		cout << endl;
-		cout << "------------------------------------------------" << endl;
-		cout << "∞‘¿”¿ª ¡æ∑·«’¥œ¥Ÿ." << endl;
-		cout << endl;
+		cout<<endl;
+		cout<<"------------------------------------------------"<<endl;
+		cout<<"Í≤åÏûÑÏùÑ Ï¢ÖÎ£åÌï©ÎãàÎã§."<<endl;
+		cout<<endl;
 		break;
 	}
 	default:
 	{
-		cout << endl;
-		cout << "¿ﬂ∏¯µ» ¿‘∑¬¿‘¥œ¥Ÿ" << endl;
+		cout<<endl;
+		cout<<"ÏûòÎ™ªÎêú ÏûÖÎ†•ÏûÖÎãàÎã§"<<endl;
 		break;
 	}
 	}

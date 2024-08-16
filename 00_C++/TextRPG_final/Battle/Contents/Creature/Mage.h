@@ -5,7 +5,7 @@ public:
 	Mage(string name, int hp, int mp, int attack);
 	virtual ~Mage();
 
-	// PlayerÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Playerì„(ë¥¼) í†µí•´ ìƒì†ë¨
 	virtual void PreAttack(Creature* other) override;
 	virtual void Attack(Creature* other) override;
 	virtual void GetExp(int amount) override;

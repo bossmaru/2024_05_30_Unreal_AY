@@ -3,7 +3,7 @@ class Monster : public Creature
 {
 public:
 	Monster(string name, int hp, int mp, int attack);
-	virtual ~Monster(); // virtual ºÙ¿©Áà¾ßÇÔ
+	virtual ~Monster(); // virtual ë¶™ì—¬ì¤˜ì•¼í•¨
 
 	virtual void Attack(Creature* other);
 	virtual void TakeDamage(int amount);

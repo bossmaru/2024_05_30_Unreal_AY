@@ -2,8 +2,8 @@
 #include "Knight.h"
 
 Knight::Knight(string name, int hp, int mp, int attack)
-: Player(name, hp, mp, attack)
-, _stamina(0)
+	: Player(name, hp, mp, attack)
+	, _stamina(0)
 {
 }
 
@@ -13,37 +13,37 @@ Knight::~Knight()
 
 void Knight::PrintInfo()
 {
-	cout << endl;
-	cout << "--------------" << endl;
-	cout << "ÀÌ¸§ : " << _name << endl;
-	cout << "HP : " << _curHp << endl;
-	cout << "MP : " << _mp << endl;
-	cout << "ATTACK : " << _attack << endl;
-	cout << "STAMINA : " << _stamina << endl;
-	cout << "EXP : " << _curExp << endl;
-	cout << "--------------" << endl;
-	cout << endl;
+	cout<<endl;
+	cout<<"--------------"<<endl;
+	cout<<"ì´ë¦„ : "<<_name<<endl;
+	cout<<"HP : "<<_curHp<<endl;
+	cout<<"MP : "<<_mp<<endl;
+	cout<<"ATTACK : "<<_attack<<endl;
+	cout<<"STAMINA : "<<_stamina<<endl;
+	cout<<"EXP : "<<_curExp<<endl;
+	cout<<"--------------"<<endl;
+	cout<<endl;
 }
 
 void Knight::PreAttack(Creature* other)
 {
-	cout << _name << "(Knight) °¡ " << other->GetName() << "¿¡°Ô °ø°ÝÀ» ½ÃµµÇÕ´Ï´Ù." << endl;
+	cout<<_name<<"(Knight) ê°€ "<<other->GetName()<<"ì—ê²Œ ê³µê²©ì„ ì‹œë„í•©ë‹ˆë‹¤."<<endl;
 }
 
 void Knight::Attack(Creature* other)
 {
-	if (other->IsDead())
+	if ( other->IsDead() )
 	{
 	}
 	else
 	{
 		// PreAttack(other);
-		float ratio = (float)_curHp / (float)_maxHp;
+		float ratio = ( float ) _curHp/( float ) _maxHp;
 
-		if (ratio < 0.5f)
+		if ( ratio<0.5f )
 		{
-			// ÇöÀç Ã¼·ÂÀÌ 50ÇÁ·Î ¹Ì¸¸
-			other->TakeDamage(_attack * 2);
+			// í˜„ìž¬ ì²´ë ¥ì´ 50í”„ë¡œ ë¯¸ë§Œ
+			other->TakeDamage(_attack*2);
 		}
 		else
 		{
@@ -55,12 +55,12 @@ void Knight::Attack(Creature* other)
 void Knight::GetExp(int amount)
 {
 	_curExp += amount;
-	if (_curExp >= _maxExp)
+	if ( _curExp>=_maxExp )
 	{
 		_curExp -= _maxExp;
-		_curHp += _maxExp * 3;
-		_mp += _maxExp / 3;
-		_attack += _maxExp / 3;
-		_stamina += _maxExp / 3;
+		_curHp += _maxExp*3;
+		_mp += _maxExp/3;
+		_attack += _maxExp/3;
+		_stamina += _maxExp/3;
 	}
 }

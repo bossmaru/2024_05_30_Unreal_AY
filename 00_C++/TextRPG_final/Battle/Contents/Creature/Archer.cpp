@@ -2,7 +2,7 @@
 #include "Archer.h"
 
 Archer::Archer(string name, int hp, int mp, int attack)
-: Player(name, hp, mp, attack)
+	: Player(name, hp, mp, attack)
 {
 }
 
@@ -12,23 +12,23 @@ Archer::~Archer()
 
 void Archer::PreAttack(Creature* other)
 {
-	cout << _name << "(Archer) °¡ " << other->GetName() << "¿¡°Ô °ø°İÀ» ½ÃµµÇÕ´Ï´Ù." << endl;
+	cout<<_name<<"(Archer) ê°€ "<<other->GetName()<<"ì—ê²Œ ê³µê²©ì„ ì‹œë„í•©ë‹ˆë‹¤."<<endl;
 }
 
 void Archer::Attack(Creature* other)
 {
-	if (other->IsDead())
+	if ( other->IsDead() )
 	{
 	}
 	else
 	{
 		// this->
-		// Creature::PreAttack(other); // ¸â¹öÇÔ¼ö¸¦ È£ÃâÇÏ±â À§ÇÑ Á¶°Ç ... °´Ã¼°¡ Ç×»ó ÀÖ¾î¾ß ÇÑ´Ù.
+		// Creature::PreAttack(other); // ë©¤ë²„í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ê¸° ìœ„í•œ ì¡°ê±´ ... ê°ì²´ê°€ í•­ìƒ ìˆì–´ì•¼ í•œë‹¤.
 		srand(time(NULL));
-		float ratio = (rand() % 100) / (float)100;
-		if (ratio < 0.3f)
+		float ratio = ( rand()%100 )/( float ) 100;
+		if ( ratio<0.3f )
 		{
-			other->TakeDamage(_attack * 3);
+			other->TakeDamage(_attack*3);
 		}
 		else
 		{
@@ -40,11 +40,11 @@ void Archer::Attack(Creature* other)
 void Archer::GetExp(int amount)
 {
 	_curExp += amount;
-	if (_curExp >= _maxExp)
+	if ( _curExp>=_maxExp )
 	{
 		_curExp -= _maxExp;
-		_curHp += _maxExp * 3;
-		_attack += _maxExp / 3;
-		_mp += _maxExp / 3;
+		_curHp += _maxExp*3;
+		_attack += _maxExp/3;
+		_mp += _maxExp/3;
 	}
 }

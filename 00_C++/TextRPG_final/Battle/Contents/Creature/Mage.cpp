@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "Mage.h"
 
-Mage::Mage(string name, int hp, int mp,int attack)
-: Player(name, hp, mp, attack)
+Mage::Mage(string name, int hp, int mp, int attack)
+	: Player(name, hp, mp, attack)
 {
 }
 
@@ -12,18 +12,18 @@ Mage::~Mage()
 
 void Mage::PreAttack(Creature* other)
 {
-	cout << _name << "(Mage) °¡ " << other->GetName() << "¿¡°Ô °ø°ÝÀ» ½ÃµµÇÕ´Ï´Ù." << endl;
+	cout<<_name<<"(Mage) ê°€ "<<other->GetName()<<"ì—ê²Œ ê³µê²©ì„ ì‹œë„í•©ë‹ˆë‹¤."<<endl;
 }
 
 void Mage::Attack(Creature* other)
 {
-	if (other->IsDead())
+	if ( other->IsDead() )
 	{
 	}
 	else
 	{
 		// PreAttack(other);
-		if (_mp < 5)
+		if ( _mp<5 )
 		{
 			_mp = 50;
 		}
@@ -38,11 +38,11 @@ void Mage::Attack(Creature* other)
 void Mage::GetExp(int amount)
 {
 	_curExp += amount;
-	if (_curExp >= _maxExp)
+	if ( _curExp>=_maxExp )
 	{
 		_curExp -= _maxExp;
-		_curHp += _maxExp * 3;
-		_attack += _maxExp / 3;
-		_mp += _maxExp / 3;
+		_curHp += _maxExp*3;
+		_attack += _maxExp/3;
+		_mp += _maxExp/3;
 	}
 }

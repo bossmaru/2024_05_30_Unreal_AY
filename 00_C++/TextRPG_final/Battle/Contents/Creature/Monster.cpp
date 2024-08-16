@@ -2,7 +2,7 @@
 #include "Monster.h"
 
 Monster::Monster(string name, int hp, int mp, int attack)
-: Creature(name, hp, mp, attack)
+	: Creature(name, hp, mp, attack)
 {
 }
 
@@ -13,7 +13,7 @@ Monster::~Monster()
 void Monster::Attack(Creature* other)
 {
 	// PreAttack(other);
-	if (IsDead() || other->IsDead())
+	if ( IsDead()||other->IsDead() )
 	{
 	}
 	else
@@ -26,7 +26,7 @@ void Monster::TakeDamage(int amount)
 {
 	_curHp -= amount;
 
-	if (_curHp < 0)
+	if ( _curHp<0 )
 	{
 		_curHp = 0;
 	}
@@ -34,52 +34,52 @@ void Monster::TakeDamage(int amount)
 
 void Monster::MonstersAttack(Player* player, vector<Creature*> group)
 {
-	while (true)
+	while ( true )
 	{
-		cout << endl;
-		cout << "--------------" << endl;
-		cout << player->GetName() << "ÀÇ °ø°Ý!!!" << endl;
-		cout << endl;
+		cout<<endl;
+		cout<<"--------------"<<endl;
+		cout<<player->GetName()<<"ì˜ ê³µê²©!!!"<<endl;
+		cout<<endl;
 
-		for (int i = 0; i < group.size(); i++)
+		for ( int i = 0; i<group.size(); i++ )
 		{
-			// ³»°¡ °ø°Ý
-			int exp = group[i]->GetCurHp();
-			player->Attack(group[i]);
-			if (group[i]->IsDead())
+			// ë‚´ê°€ ê³µê²©
+			int exp = group[ i ]->GetCurHp();
+			player->Attack(group[ i ]);
+			if ( group[ i ]->IsDead() )
 			{
-				exp -= group[i]->GetCurHp();
+				exp -= group[ i ]->GetCurHp();
 				player->GetExp(exp);
 			}
-			cout << group[i]->GetName() << "ÀÇ HP : " << group[i]->GetCurHp() << endl;
+			cout<<group[ i ]->GetName()<<"ì˜ HP : "<<group[ i ]->GetCurHp()<<endl;
 		}
 
-		// »ó´ë¹æ Á×À¸¸é ³¡
-		if (AllDead(group))
+		// ìƒëŒ€ë°© ì£½ìœ¼ë©´ ë
+		if ( AllDead(group) )
 		{
-			cout << endl;
-			cout << "ÀÌ°å½À´Ï´Ù!" << endl;
-			cout << endl;
+			cout<<endl;
+			cout<<"ì´ê²¼ìŠµë‹ˆë‹¤!"<<endl;
+			cout<<endl;
 			break;
 		}
 
-		cout << endl;
-		cout << "--------------" << endl;
-		cout << "¸ó½ºÅÍÀÇ °ø°Ý!!!" << endl;
-		cout << endl;
-		for (int i = 0; i < group.size(); i++)
+		cout<<endl;
+		cout<<"--------------"<<endl;
+		cout<<"ëª¬ìŠ¤í„°ì˜ ê³µê²©!!!"<<endl;
+		cout<<endl;
+		for ( int i = 0; i<group.size(); i++ )
 		{
-			// »ó´ë¹æÀÌ °ø°Ý
-			group[i]->Attack(player);
+			// ìƒëŒ€ë°©ì´ ê³µê²©
+			group[ i ]->Attack(player);
 		}
-		cout << player->GetName() << "ÀÇ HP : " << player->GetCurHp() << endl;
+		cout<<player->GetName()<<"ì˜ HP : "<<player->GetCurHp()<<endl;
 
-		// ³»°¡ Á×À¸¸é ³¡
-		if (player->IsDead())
+		// ë‚´ê°€ ì£½ìœ¼ë©´ ë
+		if ( player->IsDead() )
 		{
-			cout << endl;
-			cout << "Á³½À´Ï´Ù!" << endl;
-			cout << endl;
+			cout<<endl;
+			cout<<"ì¡ŒìŠµë‹ˆë‹¤!"<<endl;
+			cout<<endl;
 			break;
 		}
 	}

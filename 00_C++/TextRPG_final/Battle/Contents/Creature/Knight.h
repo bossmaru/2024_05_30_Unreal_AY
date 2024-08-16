@@ -7,14 +7,14 @@ public:
 	{
 		_stamina = other._stamina;
 	}
-	Knight& operator = (const Knight& other) // º¹»ç´ëÀÔ¿¬»êÀÚ
+	Knight& operator = (const Knight& other) // ë³µì‚¬ëŒ€ì…ì—°ì‚°ì
 	{
 		return *this;
 	}
 
-	virtual ~Knight(); // ºÙ¿©Áà¾ßÇÔ
+	virtual ~Knight(); // ë¶™ì—¬ì¤˜ì•¼í•¨
 
-	// PlayerÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Playerì„(ë¥¼) í†µí•´ ìƒì†ë¨
 	virtual void PrintInfo() override;
 	virtual void PreAttack(Creature* other) override;
 	virtual void Attack(Creature* other) override;

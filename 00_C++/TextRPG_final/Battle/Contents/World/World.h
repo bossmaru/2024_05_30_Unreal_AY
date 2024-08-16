@@ -29,14 +29,14 @@ public:
 	World();
 	~World();
 
-	// °íºí¸° ¿Ü¿¡ ¸ó½ºÅÍ Å¬·¡½º¸¦ »ó¼ÓÇÏ´Â "È©°íºí¸°" ¸¸µé±â
-	// È©°íºí¸°Àº ÇÃ·¹ÀÌ¾î 10¸íÀÌ ·¹ÀÌµåÇÏ´Â Çü½Ä.
-	// ÇÑ ¹ø¿¡ 4¸íÀÇ ÇÃ·¹ÀÌ¾î¸¦ °ø°Ý.
-	// ¾î±×·Î ½Ã½ºÅÛ ±¸Çö : °¡Àå µ¥¹ÌÁö¸¦ ¸¹ÀÌ ÁØ »óÀ§ ³× ¸íÀÇ ÇÃ·¹ÀÌ¾î¸¦ °ø°Ý.
-	// ÀÌ¹Ì Á×Àº ÇÃ·¹ÀÌ¾î´Â °ø°ÝÇÏ¸é ¾ÈµÊ
+	// ê³ ë¸”ë¦° ì™¸ì— ëª¬ìŠ¤í„° í´ëž˜ìŠ¤ë¥¼ ìƒì†í•˜ëŠ” "í™‰ê³ ë¸”ë¦°" ë§Œë“¤ê¸°
+	// í™‰ê³ ë¸”ë¦°ì€ í”Œë ˆì´ì–´ 10ëª…ì´ ë ˆì´ë“œí•˜ëŠ” í˜•ì‹.
+	// í•œ ë²ˆì— 4ëª…ì˜ í”Œë ˆì´ì–´ë¥¼ ê³µê²©.
+	// ì–´ê·¸ë¡œ ì‹œìŠ¤í…œ êµ¬í˜„ : ê°€ìž¥ ë°ë¯¸ì§€ë¥¼ ë§Žì´ ì¤€ ìƒìœ„ ë„¤ ëª…ì˜ í”Œë ˆì´ì–´ë¥¼ ê³µê²©.
+	// ì´ë¯¸ ì£½ì€ í”Œë ˆì´ì–´ëŠ” ê³µê²©í•˜ë©´ ì•ˆë¨
 
 
-	void Init(); // ÃÊ±âÈ­
+	void Init(); // ì´ˆê¸°í™”
 	void Start();
 	void End();
 
@@ -62,7 +62,7 @@ private:
 	Creature* _player;
 	Creature* _computer;
 	Creature* _monster;
-	
+
 	// vector<shared_ptr<Creature>> _players;
 	vector<Creature*> _monsters;
 	vector<Creature*> _players;

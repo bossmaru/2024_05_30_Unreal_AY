@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"D:\\2024_05_30_Unreal_AY\\02_Unreal\\UE_AY\\Source\\UE_AY\\UE_AY.Build.cs",
+		"D:\\2024_05_30_Unreal_AY\\02_Unreal\\UE_AY\\Source\\UE_AY.Target.cs",
+		"D:\\2024_05_30_Unreal_AY\\02_Unreal\\UE_AY\\Source\\UE_AYEditor.Target.cs"
+	],
+	"EngineVersion": "5.4.3"
+}

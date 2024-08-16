@@ -2,7 +2,7 @@
 #include "HobGoblin.h"
 
 HobGoblin::HobGoblin(string name, int hp, int mp, int attack)
-: Monster(name, hp, mp, attack)
+	: Monster(name, hp, mp, attack)
 {
 }
 
@@ -20,100 +20,100 @@ void HobGoblin::AggroAttack(vector<Creature*> players)
 	};
 
 	vector<PlayerPair*> playerpairs;
-	for (int i = 0; i < players.size(); i++)
+	for ( int i = 0; i<players.size(); i++ )
 	{
 		PlayerPair* playerpair = new PlayerPair();
-		playerpair->_player = players[i];
+		playerpair->_player = players[ i ];
 		playerpair->_id = i;
 		playerpair->_damage = 0;
 		playerpairs.push_back(playerpair);
 	}
 
-	while (true)
+	while ( true )
 	{
-		// Á×Àº ÇÃ·¹ÀÌ¾î »èÁ¦
-		vector<PlayerPair*>::iterator iter = std::remove_if(playerpairs.begin(), playerpairs.end(), [](PlayerPair* p)
+		// ì£½ì€ í”Œë ˆì´ì–´ ì‚­ì œ
+		vector<PlayerPair*>::iterator iter = std::remove_if(playerpairs.begin(), playerpairs.end(), [ ] (PlayerPair* p)
 		{
 			return p->_player->IsDead();
 		});
 		playerpairs.erase(iter, playerpairs.end());
 
-		// PlayersÀÇ °ø°İ
-		std::cout << endl;
-		std::cout << "--------------" << endl;
-		std::cout << "Players ÀÇ °ø°İ!!!" << endl;
-		std::cout << endl;
+		// Playersì˜ ê³µê²©
+		std::cout<<endl;
+		std::cout<<"--------------"<<endl;
+		std::cout<<"Players ì˜ ê³µê²©!!!"<<endl;
+		std::cout<<endl;
 
-		for (int i = 0; i < playerpairs.size(); i++)
+		for ( int i = 0; i<playerpairs.size(); i++ )
 		{
-			playerpairs[i]->_damage += GetCurHp();
-			playerpairs[i]->_player->Attack(this);
-			playerpairs[i]->_damage -= GetCurHp();
-			std::cout << playerpairs[i]->_player->GetName() << "ÀÇ ´©Àû damage : " << playerpairs[i]->_damage << endl;
+			playerpairs[ i ]->_damage += GetCurHp();
+			playerpairs[ i ]->_player->Attack(this);
+			playerpairs[ i ]->_damage -= GetCurHp();
+			std::cout<<playerpairs[ i ]->_player->GetName()<<"ì˜ ëˆ„ì  damage : "<<playerpairs[ i ]->_damage<<endl;
 		}
 
-		std::cout << endl;
-		std::cout << GetName() << "ÀÇ HP : " << GetCurHp() << endl;
+		std::cout<<endl;
+		std::cout<<GetName()<<"ì˜ HP : "<<GetCurHp()<<endl;
 
-		// º¸½º Á×À¸¸é ³¡
-		if (IsDead())
+		// ë³´ìŠ¤ ì£½ìœ¼ë©´ ë
+		if ( IsDead() )
 		{
-			cout << endl;
-			cout << "º¸½º¸¦ ¹°¸®ÃÆ½À´Ï´Ù!" << endl;
-			cout << "******* WIN *******" << endl;
-			cout << endl;
+			cout<<endl;
+			cout<<"ë³´ìŠ¤ë¥¼ ë¬¼ë¦¬ì³¤ìŠµë‹ˆë‹¤!"<<endl;
+			cout<<"******* WIN *******"<<endl;
+			cout<<endl;
 			break;
 		}
 
 
-		// º¸½ºÀÇ °ø°İ
-		std::cout << endl;
-		std::cout << "--------------" << endl;
-		std::cout << GetName() << " ÀÇ °ø°İ!!!" << endl;
-		std::cout << endl;
+		// ë³´ìŠ¤ì˜ ê³µê²©
+		std::cout<<endl;
+		std::cout<<"--------------"<<endl;
+		std::cout<<GetName()<<" ì˜ ê³µê²©!!!"<<endl;
+		std::cout<<endl;
 
-		// °ø°İ·Â ¼øÀ¸·Î Á¤·Ä
-		std::sort(playerpairs.begin(), playerpairs.end(), [](PlayerPair* p1, PlayerPair* p2)
+		// ê³µê²©ë ¥ ìˆœìœ¼ë¡œ ì •ë ¬
+		std::sort(playerpairs.begin(), playerpairs.end(), [ ] (PlayerPair* p1, PlayerPair* p2)
 		{
-				return (p1->_damage > p2->_damage);
+			return ( p1->_damage>p2->_damage );
 		});
 
 		int count = 0;
-		for (int i = 0; i < playerpairs.size(); i++)
+		for ( int i = 0; i<playerpairs.size(); i++ )
 		{
 			int exp = GetCurHp();
-			Attack(playerpairs[i]->_player);
+			Attack(playerpairs[ i ]->_player);
 			exp -= GetCurHp();
-			dynamic_cast<Player*>(playerpairs[i]->_player)->GetExp(exp);
+			dynamic_cast< Player* >( playerpairs[ i ]->_player )->GetExp(exp);
 
-			// 4¸í±îÁö¸¸ °ø°İ
+			// 4ëª…ê¹Œì§€ë§Œ ê³µê²©
 			count++;
-			if (count == 4)
+			if ( count==4 )
 			{
 				break;
 			}
 		}
 
-		for (int i = 0; i < playerpairs.size(); i++)
+		for ( int i = 0; i<playerpairs.size(); i++ )
 		{
-			std::cout << playerpairs[i]->_player->GetName() << "ÀÇ HP : " << playerpairs[i]->_player->GetCurHp() << endl;
+			std::cout<<playerpairs[ i ]->_player->GetName()<<"ì˜ HP : "<<playerpairs[ i ]->_player->GetCurHp()<<endl;
 		}
 
-		// ¸ğµÎ Á×À¸¸é ³¡
+		// ëª¨ë‘ ì£½ìœ¼ë©´ ë
 		bool allDead = true;
-		for (int i = 0; i < playerpairs.size(); i++)
+		for ( int i = 0; i<playerpairs.size(); i++ )
 		{
-			if (playerpairs[i]->_player->IsDead() == false)
+			if ( playerpairs[ i ]->_player->IsDead()==false )
 			{
 				allDead = false;
 				break;
 			}
 		}
-		if (allDead)
+		if ( allDead )
 		{
-			cout << endl;
-			cout << "THE END......" << endl;
-			cout << endl;
+			cout<<endl;
+			cout<<"THE END......"<<endl;
+			cout<<endl;
 			break;
 		}
 	}

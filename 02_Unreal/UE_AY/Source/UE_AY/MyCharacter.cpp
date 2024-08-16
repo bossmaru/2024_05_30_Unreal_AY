@@ -183,7 +183,8 @@ void AMyCharacter::AttackHit()
 			FDamageEvent damageEvent;
 			hitResult.GetActor()->TakeDamage(_statComponent->GetAttackDamage(), damageEvent, GetController(), this);
 			_hitPoint = hitResult.ImpactPoint;
-			EffectManager->Play("P_Wukong_GreatSage_DJO_Radius", _hitPoint);
+			// EffectManager->Play("P_Wukong_GreatSage_DJO_Radius", _hitPoint);
+			EffectManager->Play("Explosion", _hitPoint);
 			// _attackHitEventDelegate.Broadcast();
 
 			DrawDebugCapsule(GetWorld(), center, attackRange * 0.5f, attackRadius, quat, FColor::Red, false, 2.0f);

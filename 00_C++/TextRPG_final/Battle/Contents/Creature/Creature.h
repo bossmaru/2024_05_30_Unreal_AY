@@ -3,12 +3,12 @@ class Creature
 {
 public:
 	Creature(string name, int hp, int mp, int attack);
-	virtual ~Creature(); // ¿©±â virtual Àº ²À ¾ÈºÙ¿©µµ µÊ
+	virtual ~Creature(); // ì—¬ê¸° virtual ì€ ê¼­ ì•ˆë¶™ì—¬ë„ ë¨
 
 
-	// ¸â¹öÇÔ¼ö : ±â´É
+	// ë©¤ë²„í•¨ìˆ˜ : ê¸°ëŠ¥
 	virtual void PreAttack(Creature* other);
-	virtual void Attack(Creature* other) abstract; // ¼ø¼ö°¡»óÇÔ¼ö
+	virtual void Attack(Creature* other) abstract; // ìˆœìˆ˜ê°€ìƒí•¨ìˆ˜
 	virtual void TakeDamage(int amount);
 	const string& GetName();
 	const int& GetMaxHp();
@@ -18,14 +18,14 @@ public:
 	bool IsDead();
 	bool AllDead(vector<Creature*> group);
 
-	// ±íÀº º¹»ç : º¹»ç »ı¼ºÀÚ, º¹»ç´ëÀÔ¿¬»êÀÚ µÑ´Ù ÀÖ¾î¾ßÇÔ.
-// º¹»ç»ı¼ºÀÚ
+	// ê¹Šì€ ë³µì‚¬ : ë³µì‚¬ ìƒì„±ì, ë³µì‚¬ëŒ€ì…ì—°ì‚°ì ë‘˜ë‹¤ ìˆì–´ì•¼í•¨.
+// ë³µì‚¬ìƒì„±ì
 //// World(const World& other);
-// º¹»ç´ëÀÔ¿¬»êÀÚ
+// ë³µì‚¬ëŒ€ì…ì—°ì‚°ì
 //// World& operator = (const World& other);
 
 
-protected: // ¸â¹öº¯¼ö : ¼Ó¼º
+protected: // ë©¤ë²„ë³€ìˆ˜ : ì†ì„±
 	string _name;
 	int _curHp;
 	int _maxHp;

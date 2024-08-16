@@ -3,7 +3,7 @@ class Player : public Creature
 {
 public:
 	Player(string name, int hp, int mp, int attack);
-	virtual ~Player(); // virtual ºÙ¿©Áà¾ßÇÔ
+	virtual ~Player(); // virtual ë¶™ì—¬ì¤˜ì•¼í•¨
 
 	virtual void Attack(Creature* other);
 	virtual void PrintInfo();
